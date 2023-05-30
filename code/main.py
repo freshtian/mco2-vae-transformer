@@ -33,15 +33,15 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--dataset', type=str, default='Olympus_VAE')
     parser.add_argument('--mode', type=str, default='train', choices=['train', 'test'])
-    parser.add_argument('--data_path', type=str, default='./datasets')
-    parser.add_argument('--model_save_path', type=str, default='checkpoints')
+    parser.add_argument('--data_path', type=str, default='./final')
+    parser.add_argument('--model_save_path', type=str, default='final-checkpoints')
     parser.add_argument('--latent_dim', type=int, default=64)
     parser.add_argument('--num_hidden_layers', type=int, default=2)
 
     config = parser.parse_args()
 
-    #config.mode = 'train'
-    #config.mode = 'test'
+    config.mode = 'train'
+    # config.mode = 'setup.py'
 
     args = vars(config)
     main(config)

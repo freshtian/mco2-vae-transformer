@@ -20,8 +20,7 @@ class OlympusVAESegLoader(object):
         self.train = np.load(data_path + '/encoded_train.npy')
         self.val = self.train[19:]
         self.train = self.train[:19]
-
-        self.test = np.load(data_path + '/encoded_test.npy') 
+        self.test = np.load(data_path + '/encoded_test.npy')
         self.test_labels = np.zeros(10000)
 
     def __len__(self):
@@ -54,10 +53,10 @@ class OlympusHourlySegLoader(object):
         self.step = step
         self.win_size = win_size
         self.scaler = StandardScaler()
-        data = np.load(data_path + "/hourly_train.npy")
+        data = np.load(data_path + "/train.npy")
         self.scaler.fit(data)
         data = self.scaler.transform(data)
-        test_data = np.load(data_path + "/hourly_test.npy")
+        test_data = np.load(data_path + "/test.npy")
         self.test = self.scaler.transform(test_data)
         self.train = data
         data_len = len(self.train)
@@ -136,7 +135,7 @@ class OlympusDailySegLoader(object):
                               index // self.step * self.win_size:index // self.step * self.win_size + self.win_size]), np.float32(
                 self.test_labels[index // self.step * self.win_size:index // self.step * self.win_size + self.win_size])
 
-def get_loader_segment(data_path, batch_size, win_size=100, step=100, mode='train', dataset='Olympus_VAE'):
+def get_loader_segment(data_path, batch_size, win_size=100, step=100, mode='test', dataset='Olympus_VAE'):
     if (dataset == 'Olympus_Hourly'):
         dataset = OlympusHourlySegLoader(data_path, win_size, 1, mode)
     elif (dataset == 'Olympus_Daily'):
